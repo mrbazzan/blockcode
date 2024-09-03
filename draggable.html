@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Draggable Div</title>
+        <style>
+            #mydiv {
+                position: absolute;
+                border: 1px solid black;
+                text-align: center;
+            }
+            #mydivheader {
+                background-color: green;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Draggable <span><b>DIV</b></span> element</h1>
+        <p>Click and hold the mouse button while moving box</p>
+        <div id="mydiv">
+            <div id="mydivheader">Click here</div>
+            <p>Move this DIV</p>
+        </div>
+    </body>
+    <script>
+        function end(){
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+
+        function drag(e){
+            e = e || window.event;
+            e.preventDefault()
+
+            _left = e.clientX - prev_left;
+            _top = e.clientY - prev_top;
+            prev_left = e.clientX, prev_top = e.clientY;
+
+            // update myDiv's left and top attributes.
+            myDiv.style.left = myDiv.offsetLeft + _left + "px";
+            myDiv.style.top = myDiv.offsetTop + _top + "px";
+        }
+
+        function clickDiv(e){
+            e = e || window.event;
+            e.preventDefault()
+
+            prev_left = e.clientX;
+            prev_top = e.clientY;
+
+            // on mouse stop
+            document.onmouseup = end;
+
+            // on mouse drag
+            document.onmousemove = drag;
+        }
+
+        let _left = 0, _top = 0, prev_left= 0, prev_top = 0;
+        let myDiv = document.getElementById("mydiv");
+        document.getElementById(myDiv.id + "header").onmousedown = clickDiv;
+
+    </script>
+</html>
