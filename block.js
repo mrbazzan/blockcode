@@ -41,17 +41,16 @@ function blockUnits(block){
 }
 
 function blockScript(block){
-  let script = [
-    block.dataset.name,
-    blockValue(block)
-  ]
-  contents = blockContents(block);
-  if (contents != null){
-    let inner_script = [];
-    contents.forEach(block => inner_script.push(blockScript(block)))
-    script.push(inner_script)
-  } else {
-    script.push(blockUnits(block))
-  }
+  let script = [block.dataset.name];
+
+  let value = blockValue(block);
+  if (value) script.push(value);
+
+  let contents = blockContents(block);
+  let units = blockUnits(block);
+
+  if (contents) script.push(contents.map(blockScript));
+  if (units) script.push(units);
+
   return script;
 }
