@@ -16,4 +16,8 @@
         return e;
     };
 
+    global.matches = function matches(elem, selector){
+        return elem.matches(selector);
+    };
+
 })(window);
