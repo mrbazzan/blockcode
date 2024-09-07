@@ -56,11 +56,18 @@
         return script;
     }
 
+    function runBlocks(blocks){
+        // running a block means dispatching a custom 'run' event
+        // on the block. This can be caught by the block's ancestor.
+        blocks.forEach(block => trigger('run', block));
+    }
+
     global.Block = {
         create: createBlock,
         value: blockValue,
         contents: blockContents,
         script: blockScript,
+        run: runBlocks,
     };
 
 })(window);
