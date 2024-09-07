@@ -20,4 +20,8 @@
         return elem.matches(selector);
     };
 
+    global.trigger = function trigger(name, target){
+        target.dispatchEvent( new CustomEvent(name, {bubbles: true, cancelable: false}));
+    };
+
 })(window);
