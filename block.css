@@ -66,6 +66,8 @@ h1 {
   cursor: move;
 }
 
+.block.dragging { opacity: 0.4; }
+
 .menu .block { background-color: coral; }
 
 .block input {
