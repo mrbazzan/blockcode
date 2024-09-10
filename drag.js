@@ -28,6 +28,26 @@
         }
     }
 
+    function dragOver(evt){
+        if (!matches(evt.target, '.menu, .menu *, .script, .script *')){
+            // It keeps returning if the event is fired on
+            // an element that does not match the css
+            // selector above
+            return
+        }
+
+        // prevent default to allow "drop operation"
+        if (evt.preventDefault) {evt.preventDefault(); }
+
+        // .dropEffect only works on dropzones
+        if (dragType === 'menu'){
+            evt.dataTransfer.dropEffect = 'copy';
+        } else {
+            evt.dataTransfer.dropEffect = 'move';
+        }
+    }
+
     window.addEventListener('dragstart', dragStart, false);
+    window.addEventListener('dragover', dragOver, false);
 
 })(window);
