@@ -24,4 +24,14 @@
         target.dispatchEvent( new CustomEvent(name, {bubbles: true, cancelable: false}));
     };
 
+    global.closest = function closest(elem, selector){
+        while (elem){
+            if (matches(elem, selector)){
+                return elem;
+            }
+            elem = elem.parentElement;
+        }
+        return null;
+    };
+
 })(window);
