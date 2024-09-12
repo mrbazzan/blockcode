@@ -47,7 +47,58 @@
         }
     }
 
+    function drop(evt){
+        if (!matches(evt.target, '.menu, .menu *, .script, .script *')){
+            return
+        }
+
+        let dropTarget = closest(
+            evt.target,
+            '.script .container, .script .block, .menu, .script'
+        );
+
+        let dropType = "script";
+        if (matches(dropTarget, '.menu')){
+            dropType = "menu";
+        }
+
+        // stops the browser from redirecting
+        if (evt.stopPropagation){ evt.stopPropagation(); }
+
+        // dragging from script to menu
+        if (dragType === "script" && dropType === "menu"){
+            dragTarget.parentElement.removeChild(dragTarget);
+        }
+        // dragging from script to script
+        else if (dragType === "script" && dropType === "script"){
+            if (matches(dropTarget, '.block')){
+                dropTarget.parentElement.insertBefore(
+                    dragTarget, dropTarget.nextSibling
+                );
+            } else {
+                dropTarget.insertBefore(dragTarget, dropTarget.firstElementChild);
+            }
+        }
+        // dragging from menu to script
+        else if (dragType==="menu" && dropType === "script"){
+            let newNode = dragTarget.cloneNode(true);
+            newNode.classList.remove("dragging");
+            if (matches(dropTarget, '.block')){
+                dropTarget.parentElement.insertBefore(
+                    newNode,
+                    dropTarget.nextSibling
+                );
+            } else {
+                dropTarget.insertBefore(
+                    newNode,
+                    dropTarget.firstElementChild
+                );
+            }
+        }
+    }
+
     window.addEventListener('dragstart', dragStart, false);
     window.addEventListener('dragover', dragOver, false);
+    window.addEventListener('drop', drop, false);
 
 })(window);
