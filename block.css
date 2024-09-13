@@ -84,3 +84,7 @@ h1 {
   background-color: grey;
   border-radius: 5px 0 0 5px;
 }
+
+.script .block {
+  background-color: dodgerblue;
+}
