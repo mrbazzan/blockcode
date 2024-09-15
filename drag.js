@@ -97,8 +97,18 @@
         }
     }
 
+    function _findAndRemoveClass_(class_){
+        let _elem = document.querySelector('.' + class_);
+        if (_elem) _elem.classList.remove(class_);
+    }
+
+    function dragEnd(evt){
+        _findAndRemoveClass_('dragging');
+    }
+
     window.addEventListener('dragstart', dragStart, false);
     window.addEventListener('dragover', dragOver, false);
     window.addEventListener('drop', drop, false);
+    window.addEventListener('dragend', dragEnd, false);
 
 })(window);
