@@ -6,6 +6,8 @@
     let scriptRegistry = {};  // block-name -> fn
     let scriptDirty = false;  // has script been modified?
 
+    function runSoon(){ scriptDirty = true; }
+
     function run(){
         // run block on script modification
         if (scriptDirty){
@@ -37,7 +39,12 @@
 
 
     global.Menu = {
+        runSoon: runSoon,
         item: menuItem
     };
+
+    document.addEventListener('drop', runSoon, false);
+    script.addEventListener('keyup', runSoon, false);
+    script.addEventListener('change', runSoon, false);
 
 })(window);
