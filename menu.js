@@ -20,6 +20,14 @@
     // Execute the "run" function for the next frame.
     requestAnimationFrame(run);
 
+    function runEach(evt){
+        let block = evt.target;
+        if (!matches(block, '.script .block')) return
+
+        // call function associated with a block
+        scriptRegistry[block.dataset.name](block);
+    }
+
     function menuItem(name, fn, value, contents){
         let item = Block.create(name, value, contents);
         scriptRegistry[name] = fn;
@@ -46,5 +54,6 @@
     document.addEventListener('drop', runSoon, false);
     script.addEventListener('keyup', runSoon, false);
     script.addEventListener('change', runSoon, false);
+    script.addEventListener('run', runEach, false);
 
 })(window);
