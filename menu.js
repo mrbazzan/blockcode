@@ -6,6 +6,18 @@
     let scriptRegistry = {};  // block-name -> fn
     let scriptDirty = false;  // has script been modified?
 
+    function run(){
+        // run block on script modification
+        if (scriptDirty){
+            scriptDirty = false;
+            let blocks = document.querySelectorAll('.script > .block');
+            Block.run(Array.from(blocks));
+        }
+        requestAnimationFrame(run);
+    }
+    // Execute the "run" function for the next frame.
+    requestAnimationFrame(run);
+
     function menuItem(name, fn, value, contents){
         let item = Block.create(name, value, contents);
         scriptRegistry[name] = fn;
