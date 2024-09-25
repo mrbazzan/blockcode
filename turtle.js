@@ -11,7 +11,7 @@
     let ctx = canvas.getContext('2d');
     let cos = Math.cos, sin = Math.sin, sqrt = Math.sqrt, PI = Math.PI;
     let DEGREE = PI/180;
-    let color, pos, pen, WIDTH, HEIGHT;
+    let color, direction, pos, pen, visible, WIDTH, HEIGHT;
 
     function deg2rad(degree){ return degree * DEGREE; }
 
@@ -34,7 +34,28 @@
     function penDown(){ pen = true; }
     function recenter(){ pos = {x: WIDTH/2, y: HEIGHT/2 }; }
 
+    function reset(){
+        recenter();
+        direction = deg2rad(90); // facing "up"
+        visible = true;
+        pen = true;
+        color = 'green';
+    }
+
+    function clear(){
+        // we save our starting coordinate system and restore to it,
+        // to avoid using transformed one because the entire coordinate system
+        // changes when a transformation is performed.
+        ctx.save()
+        ctx.fillStyle = "white";
+        ctx.fillRect(0,0,WIDTH,HEIGHT);
+        ctx.restore();
+        reset();
+        ctx.moveTo(pos.x, pos.y);
+    }
+
     onResize();
+    clear();
 
     Menu.item("Pen up", penUp);
     Menu.item("Pen down", penDown);
