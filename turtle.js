@@ -11,7 +11,7 @@
     let ctx = canvas.getContext('2d');
     let cos = Math.cos, sin = Math.sin, sqrt = Math.sqrt, PI = Math.PI;
     let DEGREE = PI/180;
-    let pos, WIDTH, HEIGHT;
+    let color, pos, pen, WIDTH, HEIGHT;
 
     function onResize(evt){
         WIDTH = canvasPlaceholder.getBoundingClientRect().width * PIXEL_RATIO;
@@ -27,7 +27,16 @@
         }
     }
 
+    // NB: when pen is true, we draw otherwise we move without drawing
+    function penUp(){ pen = false; }
+    function penDown(){ pen = true; }
+    function recenter(){ pos = {x: WIDTH/2, y: HEIGHT/2 }; }
+
     onResize();
+
+    Menu.item("Pen up", penUp);
+    Menu.item("Pen down", penDown);
+    Menu.item("Back to center", recenter);
 
     // resize canvas and re-run the blocks in script
     window.addEventListener('resize', onResize, false);
