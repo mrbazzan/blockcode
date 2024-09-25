@@ -61,6 +61,7 @@
     Menu.item("Pen down", penDown);
     Menu.item("Back to center", recenter);
 
+    script.addEventListener('beforeRun', clear, false);
     // resize canvas and re-run the blocks in script
     window.addEventListener('resize', onResize, false);
 

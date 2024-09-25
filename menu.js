@@ -12,6 +12,7 @@
         // run block on script modification
         if (scriptDirty){
             scriptDirty = false;
+            trigger('beforeRun', script);
             let blocks = document.querySelectorAll('.script > .block');
             Block.run(Array.from(blocks));
         }
