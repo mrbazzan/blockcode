@@ -13,6 +13,8 @@
     let DEGREE = PI/180;
     let color, pos, pen, WIDTH, HEIGHT;
 
+    function deg2rad(degree){ return degree * DEGREE; }
+
     function onResize(evt){
         WIDTH = canvasPlaceholder.getBoundingClientRect().width * PIXEL_RATIO;
         HEIGHT = canvasPlaceholder.getBoundingClientRect().height * PIXEL_RATIO;
