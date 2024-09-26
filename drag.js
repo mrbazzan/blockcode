@@ -75,9 +75,7 @@
                 dropTarget.parentElement.insertBefore(
                     dragTarget, dropTarget.nextSibling
                 );
-            } else {
-                dropTarget.insertBefore(dragTarget, dropTarget.firstElementChild);
-            }
+            } else { dropTarget.appendChild(dragTarget); }
         }
         // dragging from menu to script
         else if (dragType==="menu" && dropType === "script"){
@@ -88,12 +86,7 @@
                     newNode,
                     dropTarget.nextSibling
                 );
-            } else {
-                dropTarget.insertBefore(
-                    newNode,
-                    dropTarget.firstElementChild
-                );
-            }
+            } else { dropTarget.appendChild(newNode); }
         }
     }
 
