@@ -54,9 +54,29 @@
         ctx.moveTo(pos.x, pos.y);
     }
 
+    function _moveForward(distance){
+        let start = pos;
+        pos = {
+            x: cos(direction) * distance * PIXEL_RATIO + start.x,
+            y: -sin(direction) * distance * PIXEL_RATIO + start.y
+        }
+        if (pen){
+	        ctx.strokeStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+        }
+    }
+
+    function forward(block){ _moveForward(Block.value(block)); }
+    function back(block){ _moveForward(-Block.value(block)); }
+
     onResize();
     clear();
 
+    Menu.item("Forward", forward, 5, "steps");
+    Menu.item("Back", back, 5, "steps");
     Menu.item("Pen up", penUp);
     Menu.item("Pen down", penDown);
     Menu.item("Back to center", recenter);
