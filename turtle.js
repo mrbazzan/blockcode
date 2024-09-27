@@ -71,6 +71,22 @@
         }
     }
 
+    function drawTriangle(){
+        let userPen = pen;
+        if (visible){
+            penUp(); _moveForward(5);
+            penDown();
+            _turn(-150); _moveForward(10);
+            _turn(-120); _moveForward(10);
+            _turn(-120); _moveForward(10);
+            _turn(30);
+            penUp(); _moveForward(-5);
+            if (userPen){  // restore pen state
+                penDown();
+            }
+	    }
+    }
+
     function forward(block){ _moveForward(Block.value(block)); }
     function back(block){ _moveForward(-Block.value(block)); }
     function left(block) { _turn(Block.value(block)); }
@@ -78,6 +94,7 @@
 
     onResize();
     clear();
+    drawTriangle();
 
     Menu.item("Forward", forward, 5, "steps");
     Menu.item("Back", back, 5, "steps");
@@ -88,6 +105,7 @@
     Menu.item("Back to center", recenter);
 
     script.addEventListener('beforeRun', clear, false);
+    script.addEventListener('afterRun', drawTriangle, false);
     // resize canvas and re-run the blocks in script
     window.addEventListener('resize', onResize, false);
 

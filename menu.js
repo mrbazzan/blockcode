@@ -15,6 +15,7 @@
             trigger('beforeRun', script);
             let blocks = document.querySelectorAll('.script > .block');
             Block.run(Array.from(blocks));
+            trigger('afterRun', script);
         }
         requestAnimationFrame(run);
     }
