@@ -32,6 +32,8 @@
     // NB: when pen is true, we draw otherwise we move without drawing
     function penUp(){ pen = false; }
     function penDown(){ pen = true; }
+    function hideTriangle(){ visible = false; }
+    function showTriangle(){ visible = true; }
     function recenter(){ pos = {x: WIDTH/2, y: HEIGHT/2 }; }
 
     function reset(){
@@ -103,6 +105,8 @@
     Menu.item("Pen up", penUp);
     Menu.item("Pen down", penDown);
     Menu.item("Back to center", recenter);
+    Menu.item("Show triangle", showTriangle);
+    Menu.item("Hide triangle", hideTriangle);
 
     script.addEventListener('beforeRun', clear, false);
     script.addEventListener('afterRun', drawTriangle, false);
