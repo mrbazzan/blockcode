@@ -54,6 +54,8 @@
         ctx.moveTo(pos.x, pos.y);
     }
 
+    function _turn(degree){ direction += deg2rad(degree); }
+
     function _moveForward(distance){
         let start = pos;
         pos = {
@@ -71,12 +73,16 @@
 
     function forward(block){ _moveForward(Block.value(block)); }
     function back(block){ _moveForward(-Block.value(block)); }
+    function left(block) { _turn(Block.value(block)); }
+    function right(block) { _turn(-Block.value(block)); }
 
     onResize();
     clear();
 
     Menu.item("Forward", forward, 5, "steps");
     Menu.item("Back", back, 5, "steps");
+    Menu.item("Right", right, 10, "degrees");
+    Menu.item("Left", left, 10, "degrees");
     Menu.item("Pen up", penUp);
     Menu.item("Pen down", penDown);
     Menu.item("Back to center", recenter);
